@@ -18,6 +18,13 @@ import (
 	"sync"
 )
 
+const usage = `Usage: weacli [-a] [-f] [-h] [-r] city1 city2...
+	-a    All the options together (except fahrenheti)
+	-f    If you want fahrenheit
+	-h    Display relative humidity
+	-r    Display the current rain
+	-x    If you want to explain the city adress (Barcelona Spain or South America)`
+
 type Weather struct {
 	Latitude  float64
 	Longitude float64
@@ -150,12 +157,7 @@ func main() {
 	// Get list of arguments (cities). Place in slice cities.
 	cities := flag.Args()
 	if len(cities) < 1 {
-		fmt.Println(`Usage: weacli [-a] [-f] [-h] [-r] city1 city2...
-	-a    All the options together (except fahrenheti)
-	-f    If you want fahrenheit
-	-h    Display relative humidity
-	-r    Display the current rain
-	-x    If you want to explain the city adress (Barcelona Spain or South America)`)
+		fmt.Println(usage)
 		os.Exit(1)
 	}
 
