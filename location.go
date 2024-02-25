@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 )
 
 type Location struct {
@@ -15,8 +16,7 @@ type Location struct {
 
 // Fills the location received as pointer.
 func (loc *Location) GetLocation(city string) {
-
-	resp, err := http.DefaultClient.Get("https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + city)
+	resp, err := http.DefaultClient.Get("https://nominatim.openstreetmap.org/search?format=json&limit=1&q=" + url.PathEscape(city))
 	if err != nil {
 		fmt.Println("Error in http.Get of openstreetmap.", err)
 	}
