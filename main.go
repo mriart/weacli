@@ -212,7 +212,7 @@ func PrintWeathers(weathers map[string]Weather, a, s *bool) {
 			if i == 1 {
 				fmt.Printf("Tomorrow, %s\n", v)
 			} else {
-				fmt.Printf("%s\n", v)
+				fmt.Printf("%s, %s\n", v, DayOfWeek(v))
 			}
 			fmt.Printf("  Weather code: %d - %s\n", w.Daily.WeatherCode[i], WeatherCodeExplanation(w.Daily.WeatherCode[i]))
 			fmt.Printf("  Max: %.2f°\n", w.Daily.Temperature2MMax[i])
@@ -232,4 +232,14 @@ func PrintWeathers(weathers map[string]Weather, a, s *bool) {
 		}
 		fmt.Printf("\n")
 	}
+}
+
+// Day of week. Given the string 2024-05-14, return Tuesday
+func DayOfWeek(d string) string {
+	t, err := time.Parse("2006-01-02", d)
+	if err != nil {
+		fmt.Println(err)
+		return ""
+	}
+	return t.Weekday().String()
 }
